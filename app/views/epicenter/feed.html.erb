@@ -11,24 +11,7 @@
 
 <% if @following_tweets != [] %>
 	<% @following_tweets.each do |t| %>
-		<div class="panel panel-default">
-			<div class="panel panel-body">
-				<div class="media">
-				  <div class="media-left">
-						<%= image_tag t.user.avatar.url(:thumb), class: "img-rounded" %>
-					</div>
-					<div class="media-body">
-						<%= link_to user_profile_path(id: t.user_id) do %>
-						<p>
-							<strong><%= t.user.name %></strong> @<%= t.user.username %> 
-							<% end %>
-							<span class="timestamp"><em>at <%= t.created_at.strftime("%I:%M%p on %B %-d, %Y") %></em></span>
-						</p>
-						<p><%= t.message %></p>
-					</div>
-				</div>
-		</div>
-	</div>
+		<%= render :partial => "tweet", :locals => {:t => t} %>
 	<% end %>
 <% else %>
 	<p><em>You're not following anyone yet!</em></p>
