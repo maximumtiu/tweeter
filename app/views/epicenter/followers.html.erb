@@ -3,3 +3,13 @@
 </button>
 
 <h1>@<%= @user.username %>'s followers...</h1><br />
+
+<div class="row">
+  <% if @followers.size > 0 %>
+    <% @followers.each do |user| %>
+      <%= render :partial => "user", :locals => {:user => user} %>
+    <% end %>
+  <% else %>
+    <p>@<%= @user.username %> doesn't have any followers yet!</p>
+  <% end %>
+</div>

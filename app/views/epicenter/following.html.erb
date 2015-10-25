@@ -5,27 +5,11 @@
 <h1>@<%= @user.username %> is following...</h1><br />
 
 <div class="row">
-	<% @following.each do |user| %>
-		<div class="col-md-4">
-			<div class="panel panel-default">
-				<div class="panel panel-heading">
-					<%= link_to "@" + user.username, user_profile_path(id: user.id) %>
-				</div>
-				<div class="panel panel-body">
-					<div class="media">
-						<% if user.avatar.url != nil %>
-							<div class="media-left">
-								<%= image_tag user.avatar.url(:thumb), class: "img-rounded" %>
-							</div>
-						<% end %>
-						<div class="media-body">
-							<p><strong><%= user.name %></strong></p>
-							<p><%= user.location %></p>
-							<p><%= user.bio %></p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	<% end %>
+	<% if @following.count > 0 %>
+		<% @following.each do |user| %>
+			<%= render :partial => "user", :locals => {:user => user} %>
+		<% end %>
+	<% else %>
+    <p>@<%= @user.username %> isn't following anyone yet!</p>
+  <% end %>
 </div>

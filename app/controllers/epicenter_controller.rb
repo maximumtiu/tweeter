@@ -68,6 +68,10 @@ class EpicenterController < ApplicationController
     @users = User.all
     @following = []
     @user.following.each do |user|
+      @following.push(user)
+    end
+    @following.map! do |user|
+      user = User.find(user)
     end
   end
 
@@ -76,9 +80,12 @@ class EpicenterController < ApplicationController
     @users = User.all
     @followers = []
     @users.each do |user|
-      if user.following.include?(@user)
-        followers.push(user)
+      if user.following.include?(@user.id)
+        @followers.push(user)
       end
+    end
+    @followers.map! do |user|
+      user = User.find(user)
     end
   end
 end
