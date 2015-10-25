@@ -1,9 +1,10 @@
 <div class="head">
-	<%= link_to "New Tweet", new_tweet_path, class: "btn btn-primary btn-nav" %>
+	<button type="button" class="btn btn-primary btn-nav" data-toggle="modal" data-target="#myModal">
+    New Tweet
+  </button>
 	<h1>Global Feed</h1>
 	<h4>Here's what the world has to say:</h4><br />
 </div>
-
 
 <% @tweets.each do |t| %>
 	<%= render :partial => "tweet", :locals => {:t => t} %>
