@@ -24,13 +24,13 @@
 				<%= @user.tweets.length %>
 			</div>
 			<div class="col-md-1 following-count">
-				<%= link_to following_path(id: @user.id) do %>
+				<%= link_to following_path(id: @user.id), class: "profile-data" do %>
 					<h6>Following</h6>
 					<%= @user.following.length %>
 				<% end %>
 			</div>
 			<div class="col-md-1">
-				<%= link_to followers_path(id: @user.id) do %>
+				<%= link_to followers_path(id: @user.id), class: "profile-data" do %>
 					<h6>Followers</h6>
 					<%= @followers %>
 				<% end %>
