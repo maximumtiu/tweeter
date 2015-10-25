@@ -1,0 +1,36 @@
+<div class="head">
+	<button type="button" class="btn btn-primary btn-nav" data-toggle="modal" data-target="#myModal">
+  	New Tweet
+	</button>
+	<h1>Welcome to Tweeter</h1>
+</div>
+
+<h4>Hello, <%= link_to "@" + current_user.username, user_profile_path(id: current_user.id) %>!</h4>
+<h4>Here's what your friends are saying:</h4>
+
+
+<% if @following_tweets != [] %>
+	<% @following_tweets.each do |t| %>
+		<div class="panel panel-default">
+			<div class="panel panel-body">
+				<div class="media">
+				  <div class="media-left">
+						<%= image_tag t.user.avatar.url(:thumb), class: "img-rounded" %>
+					</div>
+					<div class="media-body">
+						<%= link_to user_profile_path(id: t.user_id) do %>
+						<p>
+							<strong><%= t.user.name %></strong> @<%= t.user.username %> 
+							<% end %>
+							<span class="timestamp"><em>at <%= t.created_at.strftime("%I:%M%p on %B %-d, %Y") %></em></span>
+						</p>
+						<p><%= t.message %></p>
+					</div>
+				</div>
+		</div>
+	</div>
+	<% end %>
+<% else %>
+	<p><em>You're not following anyone yet!</em></p>
+	<p>Check out the <%= link_to "Global Feed", global_feed_path %> to find interesting users.</p>
+<% end %>

@@ -1,0 +1,59 @@
+<div class="media">
+	<div class="media-left">
+		<% if current_user.avatar != nil %>
+			<div>
+				<%= image_tag @user.avatar.url(:medium), class: "profile-pic" %>
+			</div>
+		<% end %>
+	</div>
+	<div class="text-data media-body">
+		<% if current_user == @user %>
+			<%= link_to "New Tweet", new_tweet_path, class: "btn btn-primary btn-nav" %>
+		<% elsif current_user.following.include?(@user.id) %>
+			<%= link_to "Following", unfollow_path(id: @user.id), class: "btn btn-primary btn-nav", id: "unfollow-btn" %>
+		<% else %>
+			<%= link_to "Follow", now_following_path(id: @user.id), class: "btn btn-primary btn-nav" %>
+		<% end %>
+		<h1>@<%= @user.username %></h1>
+		<h2><%= @user.name %></h2>
+		<h4><%= @user.location %></h3>
+		<h4><%= @user.bio %></h3>
+		<div class="row">
+			<div class="col-md-1">
+				<h6>Tweets</h6>
+				<%= @user.tweets.length %>
+			</div>
+			<div class="col-md-1 following-count">
+				<%= link_to following_path(id: @user.id) do %>
+					<h6>Following</h6>
+					<%= @user.following.length %>
+				<% end %>
+			</div>
+			<div class="col-md-1">
+				<%= link_to followers_path(id: @user.id) do %>
+					<h6>Followers</h6>
+					<%= @followers %>
+				<% end %>
+			</div>
+	</div>
+</div>
+
+<% @user.tweets.order(created_at: :desc).each do |t| %>
+	<div class="row">
+		<div class="col-md-8 col-md-offset-3">
+			<div class="panel panel-default">
+				<div class="panel panel-body">
+					<div class="media">
+						<div class="media-left">
+							<%= image_tag t.user.avatar.url(:thumb), class: "img-rounded" %>
+						</div>
+						<div class="media-body">
+		 					<p><%= t.message %></p>
+		 					<p><span class="timestamp"><em>at <%= t.created_at.strftime("%I:%M%p on %B %-d, %Y") %></em></span></p>
+		 				</div>
+		 			</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<% end %>

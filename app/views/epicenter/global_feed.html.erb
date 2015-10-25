@@ -1,0 +1,27 @@
+<div class="head">
+	<%= link_to "New Tweet", new_tweet_path, class: "btn btn-primary btn-nav" %>
+	<h1>Global Feed</h1>
+	<h4>Here's what the world has to say:</h4><br />
+</div>
+
+
+<% @tweets.each do |t| %>
+	<div class="panel panel-default">
+		<div class="panel panel-body">
+			<div class="media">
+				  <div class="media-left">
+						<%= image_tag t.user.avatar.url(:thumb), class: "img-rounded" %>
+					</div>
+					<div class="media-body">
+						<%= link_to user_profile_path(id: t.user_id) do %>
+						<p>
+							<strong><%= t.user.name %></strong> @<%= t.user.username %> 
+							<% end %>
+							<span class="timestamp"><em>at <%= t.created_at.strftime("%I:%M%p on %B %-d, %Y") %></em></span>
+						</p>
+						<p><%= t.message %></p>
+					</div>
+				</div>
+		</div>
+	</div>
+<% end %>

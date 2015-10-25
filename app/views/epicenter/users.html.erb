@@ -1,0 +1,33 @@
+<button type="button" class="btn btn-primary btn-nav" data-toggle="modal" data-target="#myModal">
+  	New Tweet
+</button>
+
+<h1>All Users</h1><br />
+
+<div class="row">
+	<% @users.shuffle.each do |user| %>
+		<div class="col-md-4">
+			<div class="panel panel-default">
+				<div class="panel panel-heading panel-title">
+					<%= link_to "@" + user.username, user_profile_path(id: user.id) %>
+				</div>
+				<%= link_to user_profile_path(id: user.id) do %>
+				<div class="panel panel-body panel-text">
+					<div class="media">
+						<% if user.avatar.url != nil %>
+							<div class="media-left">
+								<%= image_tag user.avatar.url(:thumb), class: "img-rounded" %>
+							</div>
+						<% end %>
+						<div class="media-body">
+							<p><strong><%= user.name %></strong></p>
+							<p><%= user.location %></p>
+							<p><%= user.bio %></p>
+						</div>
+					</div>
+				</div>
+			<% end %>
+			</div>
+		</div>
+	<% end %>
+</div>

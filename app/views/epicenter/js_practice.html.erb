@@ -1,0 +1,35 @@
+<p>What is the double of 9?</p>
+<p id="answer"></p>
+<button class="btn btn-success" onclick="addItUp(9,9)">Get Answer</button>
+
+<p id="html_question" onclick="htmlAnswer()">What does HTML stand for?</p>
+<p id="css_question" onclick="cssAnswer()">What does CSS stand for?</p>
+
+<p class="multiply-it">What is the quadruple of 9?</p>
+<p id="answer2"></p>
+<button class="btn btn-success multiply-it">Get Answer</button>
+
+<script type="text/javascript">
+
+	function addItUp(x,y) {
+		var sum = x + y
+		document.getElementById("answer").innerHTML = sum
+	}
+
+	function cssAnswer() {
+		ans = "Cascading Style Sheet"
+		document.getElementById("css_question").innerHTML = ans
+	}
+
+	function htmlAnswer() {
+		ans = "Hypertext Markup Language"
+		document.getElementById("html_question").innerHTML = ans
+	}
+
+	$(document).ready(function(){
+		$(".multiply-it").click(function(){
+			$("#answer2").html(9 * 4)
+		})
+	})
+
+</script>
